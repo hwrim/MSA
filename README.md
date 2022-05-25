@@ -29,3 +29,24 @@
 3. 장애 격리(Fault Isolation)
     * 특정 서비스에 오류가 발생해도 다른 서비스에는 영향을 끼치지 않음 (Micro Service는 하나의 작은 독립적인 Application이므로 문제점이나 오류사항은 다른쪽 서비스로의 영향을 최소화)
     * 배포된 Micro Service들은 자신의 위치를 등록을 해야함. 다른 서비스들이 해당 서비스를 검색하고 사용할 수 있음 (Micro Service는 Discovery Service라는 곳에 등록하고 삭제 되도록 설정해야함)
+
+## Cloud Native Architecture
+* Cloud Native Application를 개발하거나 서비스를 운영할 때 고려해야할 12가지
+* 클라우드 서비스중 FaaS 형태의 서비스를 제공하는 Heroku(허로쿠) 회사가 제시
+    1. 코드 통합(Base Code) : 형상 관리를 위해 코드를 한 곳에서 배포하는 것이 주 목적
+    2. 종속성 배제(Dependency Isolation) : 각 Micro Service는 자체 종속성을 가지고 패키징 되어있음 전체 시스템에 영향을 주지않는 형태에서 변경 되어야 함
+    3. 환경설정의 외부 관리(Configuration) : 코드의 외부에서 관리 도구를 통해 Micro Service에 필요한 작업들을 구성할 수 있어야함
+    4. 백업 서비스의 분리(Backing Services) : 응용프로그램 자체에서 필요한 백업 서비스를 분리하게 됨으로서 서로 상호가능한 서비스 자체를 종속성 없는 상태에서 작업 가능
+    5. 개발 환경과 테스트 운영 환경의 분리(Build, Release, Run) : 빌드, 릴리즈, 실행환경을 분리. 개발 서버에서 만들어진 코드 배포 하기위해 실행단계 까지 옮기는 환경을 엄격하게 관리
+    6. 상태관리(Processes) : 프로세스 각각의 Micro Service들은 실행되는 서비스와 분리된 채, 자체 프로세스에서 운영가능해야 함(독립성과 일치)
+    7. 포트 바인딩(Port Binding) : 다른 Micro Service와 격리를 위해 각각의 Micro Service는 자체 포트에서 노출되는 인터페이스 및 자체에 포함되는 기능이 있어야 함
+    8. 동시성(Concurrency) : 하나의 서비스가 여러가지 인스턴스에 동일한 형태로 복사되면서 운영됨으로서 부하 분산이 가능
+    9. 서비스의 올바른 상태 유지(Disposability) : 서비스의 인스턴스 자체가 삭제가 가능 하며 확장성을 높이고 정상적으로 종료 될 수 있는 환경이 되어야 함
+    10. 개발과 production단계 구분(Dev/Prod Parity) : 환경자체를 최대한 다른 쪽에 있는 작업과 중복되지 않고 종속되지 않는 상태로서 서비스를 유지할 수 있어야
+    11. Log의 분리(Logs) : Log를 출력시키는 Logic은 기존에 있었던 Application Logic과 분리 되어서 Application 자체가 실행되지 않는 상태라 해도 Logging만은 정상적으로 작동해야 함
+    12. 관리 프로세스(Admin Processes) : 현재 운영되고 있는 모든 Micro Service들이 어떤 상태이며 어떤 리소스로 구성되어있는지 파악하기 위해 관리 도구. 이러한 작업에는 리포팅할 수 있는 기술이 포함되어 있어야 하고 데이터 정리 및 데이터를 분석하는 기능이 포함될 수 있음
+    
+> * 12Factors + 3개의 항목(Pivotal 회사가 발표)
+    >   1. API First : 모든 Micro Service는 API형태로 서비스 제공. API를 구축함에 있어서 사용자 측에서 어떤 형태로 사용할 것인지 먼저 고민하고 개발해야 함
+    >   2. Telemetry : 모든 지표는 수치화 및 시각화 되어야 함
+    >   3. Autentication and Authorization : API를 사용함에 있어서 인증 과정 필수
