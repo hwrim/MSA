@@ -50,3 +50,22 @@
     >   1. API First : 모든 Micro Service는 API형태로 서비스 제공. API를 구축함에 있어서 사용자 측에서 어떤 형태로 사용할 것인지 먼저 고민하고 개발해야 함
     >   2. Telemetry : 모든 지표는 수치화 및 시각화 되어야 함
     >   3. Autentication and Authorization : API를 사용함에 있어서 인증 과정 필수
+
+## Monolithic vs MSA
+
+1. Monolithic
+* 모든 업무 로직이 하나의 어플리케이션 형태로 패키지 되어 서비스
+* 어플리케이션에서 사용하는 데이터가 한곳에 모여 참조되어 서비스되는 형태
+* Application을 구성하는 서비스들 간 의존성을 가짐
+    * 문제점 - 부분의 장애가 서비스 전체적인 장애, scale out 불가능, 시스템 일부만 수정을 하여도 전체 시스템을 다시 패키징 하고 빌드-테스트-배포 해야함
+2. MSA
+* 함께 작동하는 작은 규모의 서비스들 - Sam Newman
+* scale out 가능
+* 유지보수 및 변경사항이 적용이 쉬움
+* 통일된 언어를 사용하지 않아도 됨
+* 서로 다른 언어 및 서로 다른 Database를 사용가능
+* 각각의 제공해야하는 Service를 restAPI를 통해서 제공 가능 및 다른 Micro Service들과 통신 가능
+    * 문제점 - 트랜잭션이 불편, 개발 시간 증가, 성능 이슈
+>   * 최근에는 Application 개발 시 사용자들의 다양한 Smart Device를 고려해야 함
+>   * Web Browser 뿐 아니라 스마트 워치, 스마트폰, 태블릿, 노트북 등의 Device도 고려해야함
+>   * 사용자가 요청하는 형태로 응답이 가능 해야하기 때문에 RestAPI를 사용
