@@ -20,6 +20,10 @@ spring:
             preLogger: true
             PostLogger: true
       routes:
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/**
         - id: fist-service
           uri: lb://MY-FIRST-SERVICE
           predicates:
